@@ -1,0 +1,9 @@
+8
+apple
+app
+application
+apt
+bat
+batch
+ball
+banana
