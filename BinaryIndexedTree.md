@@ -9,3 +9,8 @@
 5. Operation $rsq(j)$ $O(log n)$ queremos la frecuencia acumulativa de los elementos de $1$ a $j$. Podemos sumar $ft[j]$ y $ft[padre(j)]$ y seguir sumando hasta que $j = 0$. $Padre(j) = j - LSOne(j)$. Ej: $rsq(6) = ft[6] + ft[4] + ft[0]$
 6. Un entero $j$ solo tiene $log(j)$ bits, por lo que $rsq(j)$ es $O(log m)$ donde $m$ es el valor máximo de $j$.
 7. Los indices $6$, $4$ y $0$ estan relacionado por su forma binaria $j = 110$, $j' = 100$ y $j'' = 000$.
+8. Operation $rsq(i,j)$ $O(log n)$ queremos la frecuencia acumulativa de los elementos de $i$ a $j$. Podemos restar $rsq(j) - rsq(i-1)$.
+
+
+Dado un array de numeros enteros hacer consultas por rango de producto donde como resultado me diga si es numero positivo negativo o cero, el numero maximo de los enteros es 10^32.
+
