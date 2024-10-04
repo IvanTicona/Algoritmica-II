@@ -13,4 +13,3 @@
 
 
 Dado un array de numeros enteros hacer consultas por rango de producto donde como resultado me diga si es numero positivo negativo o cero, el numero maximo de los enteros es 10^32.
-
