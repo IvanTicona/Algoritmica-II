@@ -41,7 +41,7 @@ int main(){
 
   int V, E;
   scanf("%d %d", &V, &E);
-  vector<iii> EL(E);
+  vector<iii> EL(E); //EdgeList
   for (int i = 0; i < E; ++i){
     int u, v, w;
     scanf("%d %d %d", &u, &v, &w); // read as (u, v, w)
