@@ -39,29 +39,26 @@ public:
 
 int main(){
 
-  int V, E;
-  scanf("%d %d", &V, &E);
-  vector<iii> EL(E); //EdgeList
+  int V, E; scanf("%d %d", &V, &E);
+  vector<iii> EL(E); // Lista de Aristas
+
   for (int i = 0; i < E; ++i){
-    int u, v, w;
-    scanf("%d %d %d", &u, &v, &w); // read as (u, v, w)
-    EL[i] = {w, u, v};             // reorder as (w, u, v)
+    int u, v, w; scanf("%d %d %d", &u, &v, &w); // Leemos arista, nodos y peso (u, v, w)
+    EL[i] = {w, u, v};             // Reordenamos (w, u, v)
   }
-  sort(EL.begin(), EL.end()); // sort by w, O(E log E)
-  // note: std::tuple has built-in comparison function
-  int mst_cost = 0, num_taken = 0; // no edge has been taken
-  UnionFind UF(V);                 // all V are disjoint sets
-  // note: the runtime cost of UFDS is very light
-  for (auto &[w, u, v] : EL){ // C++17 style
-    if (UF.isSameSet(u, v))
-      continue;        // already in the same CC
-    mst_cost += w;     // add w of this edge
-    UF.unionSet(u, v); // link them
-    ++num_taken;       // 1 more edge is taken
-    if (num_taken == V - 1)
-      break; // optimization
+  sort(EL.begin(), EL.end()); // Ordenamos por peso O(E log E)
+
+  int mst_cost = 0, num_taken = 0; // Ninguna arista es tomada
+  UnionFind UF(V);                 // Todos los nodos son conjuntos disjuntos
+
+  for (auto &[w, u, v] : EL){
+    if (UF.isSameSet(u, v)) continue; // Ya estan en conectados
+    mst_cost += w;     // Sumamos el peso de la arista
+    UF.unionSet(u, v); // Unimos los nodos
+    ++num_taken;       // 1 aristas mas tomada
+    if (num_taken == V - 1) break; // Ya tenemos el MST, optimizacion
   }
-  // note: the number of disjoint sets must eventually be 1 for a valid MST
+  // Nota: Eventualmente el numero de conjuntos disjuntos es 1 para ser un MST
   printf("MST cost = %d (Kruskal’s)\n", mst_cost);
 
   return 0;

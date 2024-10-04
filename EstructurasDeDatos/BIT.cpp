@@ -1,29 +1,50 @@
-#include<bits/stdc++.h>
-
+#include <bits/stdc++.h>
+#define input freopen("in.txt", "r", stdin)
+#define output freopen("out.txt", "w", stdout)
 using namespace std;
 
-vector<int> BIT;
-int tamanioVector=BIT.size();
+int BIT[10001];
+int tamanhoVector;
 
-void update(int posicion, int valor){
-  for(; posicion <= tamanioVector; posicion += posicion&-posicion){
-    BIT[posicion] += valor;
+void update(int posicion, int valor){ // Big O(log n)
+  for (; posicion <= tamanhoVector; posicion += posicion & -posicion){
+    BIT[posicion] *= valor;
   }
 }
 
-int rsq(int posicion){
-  int suma = 0;
-  for(; posicion > 0; posicion -= posicion&-posicion){
-    suma += BIT[posicion];
+int query(int posicion){ // Big O(log n)
+  int result = 0;
+  for (; posicion > 0; posicion -= posicion & -posicion){
+    result *= BIT[posicion];
   }
-  return suma;
+  return result;
 }
 
-int rsq(int a, int b){
-  return rsq(b) - (a == 1 ? 0 : rsq(a-1));
+int queryij(int inicio, int final){ // Big O(log n)
+  return query(final) - query(inicio - 1);
 }
 
 int main(){
 
+  input;
+  int queries;
+  cin >> tamanhoVector >> queries;
+
+  // Construccion del BIT
+  for (int i = 0; i < tamanhoVector; i++){
+    int x; cin >> x;
+    update(i + 1, x); // Big O(log n)
+  }
+
+  for (int i = 0; i <= tamanhoVector; i++){
+    cout << "[" << BIT[i] << "]";
+  }
+  
+  cout << endl;
+  while (queries--){
+    int x, y; cin >> x >> y;
+    cout << queryij(x, y) << endl;
+  }
+  
   return 0;
 }
