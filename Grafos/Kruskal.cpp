@@ -39,6 +39,9 @@ public:
 
 int main(){
 
+  freopen("input.txt","r",stdin);
+  freopen("output.txt","w",stdout);
+
   int V, E; scanf("%d %d", &V, &E);
   vector<iii> EL(E); // Lista de Aristas
 

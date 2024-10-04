@@ -1,0 +1,1 @@
+MST cost = 28 (Kruskal’s)
