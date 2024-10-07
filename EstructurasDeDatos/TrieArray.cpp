@@ -53,6 +53,46 @@ void deleteWord(node *trie, string word){
   currentNode->endOfWord = false; //Marcamos el final de la palabra como falso ya que la eliminamos
 }
 
+bool hasChildren(node *currentNode) {
+    for (int i = 0; i < 26; i++) { // Verifica si el nodo tiene hijos
+        if (currentNode->children[i] != NULL) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool deleteWor(node *currentNode, string word, int depth = 0) {
+    if (depth == word.size()) { // Si hemos recorrido toda la palabra
+        if (!currentNode->endOfWord) {
+            return false; // La palabra no existe
+        }
+        currentNode->endOfWord = false; // Marcamos el final de palabra como falso
+        return !hasChildren(currentNode); // Retornamos si no tiene hijos (puede eliminarse)
+    }
+
+    int index = word[depth] - 'a'; // Obtenemos el índice de la letra actual
+    node *childNode = currentNode->children[index];
+
+    if (childNode == NULL) {
+        return false; // La palabra no existe
+    }
+
+    // Llamada recursiva al siguiente nivel
+    bool shouldDeleteCurrentNode = deleteWor(childNode, word, depth + 1);
+
+    // Si se debe eliminar el nodo hijo, lo eliminamos
+    if (shouldDeleteCurrentNode) {
+        delete currentNode->children[index]; // Elimina el nodo hijo
+        currentNode->children[index] = NULL; // Marca la referencia como nula
+
+        // Retorna true si el nodo actual no tiene hijos y no es el final de otra palabra
+        return !hasChildren(currentNode) && !currentNode->endOfWord;
+    }
+
+    return false;
+}
+
 int main(){
 
 	node *trie = new node(); //Creamos el nodo raiz (nodo fantasma)

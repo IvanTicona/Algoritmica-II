@@ -8,14 +8,14 @@ int tamanhoVector;
 
 void update(int posicion, int valor){ // Big O(log n)
   for (; posicion <= tamanhoVector; posicion += posicion & -posicion){
-    BIT[posicion] *= valor;
+    BIT[posicion] += valor;
   }
 }
 
 int query(int posicion){ // Big O(log n)
   int result = 0;
   for (; posicion > 0; posicion -= posicion & -posicion){
-    result *= BIT[posicion];
+    result += BIT[posicion];
   }
   return result;
 }
@@ -31,7 +31,7 @@ int main(){
   cin >> tamanhoVector >> queries;
 
   // Construccion del BIT
-  for (int i = 0; i < tamanhoVector; i++){
+  for (int i = 0; i < tamanhoVector; i++){ // Big O(n log n)
     int x; cin >> x;
     update(i + 1, x); // Big O(log n)
   }

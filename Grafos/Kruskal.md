@@ -14,3 +14,6 @@ Pueden haber muchos spanning trees posibles, DFS y BFS spanning trees, SSSP span
 
 Runtime: O(sorting + trying to add each edge * cost of UF operations)
          O(E log E + E * ~= 1) = O(E log E) = O(E log (V^2)) = O(2 * E log V) = O(E log V)
+
+
+Listar 4 aplicaciones del TRIE

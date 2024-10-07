@@ -35,15 +35,15 @@ void showBIT(){
 
 int main(){
 
+  freopen("output.txt", "w", stdout);
+
   //Precios de los productos
   vector<int> prices = {0, 2, 5, 1, 6, 3, 7, 4, 9};
-
   //Construccion del BIT
   for (int i = 1; i <= n; i++){
     update(i, prices[i]);
   }
   showBIT();
-
   //Consultas y actualizaciones
   cout<<"max(1,4) = "<<queryij(1, 4)<<endl<<endl;
   update(5, 10);

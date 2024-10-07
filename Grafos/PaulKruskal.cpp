@@ -53,6 +53,7 @@ struct Arista{
     Arista(){}
     // sobrecarga del operador < para ordenar las aristas
     // sort 
+    //BUSCAR SOBRE CARGA DE METODOS Y DE OPERADORES
     bool operator<(const Arista &a) const {
         if(peso == a.peso) {
             return origen < a.origen;
