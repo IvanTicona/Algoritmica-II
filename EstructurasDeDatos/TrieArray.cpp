@@ -93,7 +93,41 @@ bool deleteWor(node *currentNode, string word, int depth = 0) {
     return false;
 }
 
+void printWords(node *trie, string prefix) {
+  node *currentNode = trie;
+  stack<node*> path;
+  string words = prefix;
+  for (int i = 0; i < prefix.size(); i++) {
+    int index = prefix[i] - 'a';
+    if (currentNode->children[index] == NULL) {
+      cout<<"No words found with this prefix\n";
+      return;
+    }
+    currentNode = currentNode->children[index];
+  }
+  //Ya estoy en el nodo que tiene el prefijo
+  //Ahora quiero imprimir todas las palabras que tienen ese prefijo
+  path.push(currentNode);
+  while (!path.empty()) {
+    currentNode = path.top();
+    path.pop();
+    if (currentNode->endOfWord) {
+      cout<<words<<endl;
+    }
+    for (int i = 0; i < 26; i++) {
+      if (currentNode->children[i] != NULL) {
+        path.push(currentNode->children[i]);
+        words += currentNode->children[i]->currentCharacter;
+      }
+    }
+  }
+
+}
+
 int main(){
+
+  // freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
 
 	node *trie = new node(); //Creamos el nodo raiz (nodo fantasma)
 
@@ -102,6 +136,9 @@ int main(){
     "apple",
     "app",
     "apricot",
+    "apoyo",
+    "apuntar",
+    "aprender",
     "banana",
     "blueberry",
     "cranberry",
@@ -129,27 +166,29 @@ int main(){
 	}
 
   //Buscamos palabras en el trie
-  cout<<search(trie, "apple")<<endl; //true
-  cout<<search(trie, "adrian")<<endl; //false
-  cout<<search(trie, "app")<<endl; //true
-  cout<<search(trie, "grapefruit")<<endl; //true
-  cout<<search(trie, "dorian")<<endl; //false
-  cout<<search(trie, "lemon")<<endl; //true
-  cout<<search(trie, "papaya")<<endl; //true
-  cout<<search(trie, "paul")<<endl; //false
-  cout<<search(trie, "pear")<<endl; //true
+  // cout<<search(trie, "apple")<<endl; //true
+  // cout<<search(trie, "adrian")<<endl; //false
+  // cout<<search(trie, "app")<<endl; //true
+  // cout<<search(trie, "grapefruit")<<endl; //true
+  // cout<<search(trie, "dorian")<<endl; //false
+  // cout<<search(trie, "lemon")<<endl; //true
+  // cout<<search(trie, "papaya")<<endl; //true
+  // cout<<search(trie, "paul")<<endl; //false
+  // cout<<search(trie, "pear")<<endl; //true
 
-  //Eliminamos palabras del trie
-  deleteWord(trie, "apple");
-  cout<<search(trie, "apple")<<endl; //false
-  deleteWord(trie, "app");
-  cout<<search(trie, "app")<<endl; //false
-  deleteWord(trie, "grapefruit");
-  cout<<search(trie, "grapefruit")<<endl; //false
-  deleteWord(trie, "kiwi");
-  cout<<search(trie, "kiwi")<<endl; //false
-  deleteWord(trie, "lemon");
-  cout<<search(trie, "lemon")<<endl; //false
+  // //Eliminamos palabras del trie
+  // deleteWord(trie, "apple");
+  // cout<<search(trie, "apple")<<endl; //false
+  // deleteWord(trie, "app");
+  // cout<<search(trie, "app")<<endl; //false
+  // deleteWord(trie, "grapefruit");
+  // cout<<search(trie, "grapefruit")<<endl; //false
+  // deleteWord(trie, "kiwi");
+  // cout<<search(trie, "kiwi")<<endl; //false
+  // deleteWord(trie, "lemon");
+  // cout<<search(trie, "lemon")<<endl; //false
+
+  printWords(trie, "app");
 
 	return 0;
 }

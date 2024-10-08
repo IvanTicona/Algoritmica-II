@@ -1,9 +1,6 @@
 #include <bits/stdc++.h> 
 #define input freopen("in.txt", "r", stdin)
 #define output freopen("out.txt", "w", stdout)
-#include <bits/stdc++.h> 
-#define input freopen("in.txt", "r", stdin)
-#define output freopen("out.txt", "w", stdout)
 // Variables
 #define MAX_N 100010
 
@@ -49,8 +46,8 @@ node query(int inicio, int final, int nodoActual, int izquierda, int derecha ) {
     }
     
     int mid = (inicio + final ) / 2; 
-    int nodoIzquierdo = 2 * nodoActual + 1;
-    int nodoDerecho   = 2 * nodoActual + 2;
+    int nodoIzquierdo = 2 * nodoActual + 1; //Indice del nodo izquierdo
+    int nodoDerecho   = 2 * nodoActual + 2; //Indice del nodo derecho
 
     if(derecha <= mid ) { // Si el rango esta en el subarbol izquierdo
         return query(inicio, mid, nodoIzquierdo, izquierda, derecha); 
@@ -62,9 +59,7 @@ node query(int inicio, int final, int nodoActual, int izquierda, int derecha ) {
         node nodeRight   = query(mid+1, final, nodoDerecho,izquierda,derecha);
 
         node result ;
-        result.max = max(nodeLeft.max, nodeRight.max);
-        result.min = min(nodeLeft.min, nodeRight.min); 
-        result.gcd = gcd(nodeLeft.gcd, nodeRight.gcd); 
+        result.sum = nodeLeft.sum + nodeRight.sum;
         return result;
     }
 }
@@ -75,7 +70,7 @@ void update(int inicio, int final, int nodoActual, int posicion, int valor ) {
     }
 
     if( inicio == final ) {
-        segmentTree[nodoActual].max = valor;
+        segmentTree[nodoActual].sum = valor;
     } else { 
 
         int mid = (inicio + final ) / 2;
