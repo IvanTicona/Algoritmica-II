@@ -97,15 +97,15 @@ int main() {
     for(int i = 0; i < n; i++) {
         cin>>a[i];
     }
-    // Inicializar Segment Tree 
-    init(0,n-1, 0);    
+    // Inicializar Segment Tree
+    init(0,n-1, 0);
 
     for(int i = 0; i < 2*n; i++) {
         cout<<"[ "<<segmentTree[i].sum<<" ]";
     }
     cout<<endl;
     int queries;
-    cin>> queries; 
+    cin>> queries;
     for(int i = 0 ;i <queries ; i++) {
         int izquierda, derecha; 
         cin>> izquierda >> derecha; 
