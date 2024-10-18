@@ -1,0 +1,3 @@
+Tiempo de ejecución: 3.1102 segundos
+Iteraciones: 32724
+Max Flow: 32724
