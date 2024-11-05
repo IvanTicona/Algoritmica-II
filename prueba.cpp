@@ -7,29 +7,23 @@ using namespace std;
 
 int main(){
 
-  // freopen("input.txt", "r", stdin);
-  // freopen("output.txt", "w", stdout);
+  freopen("input.txt", "r", stdin);
+  freopen("output.txt", "w", stdout);
 
-  int x = 11023;
-
-  int left = 0;
-  int right = 20000;
-  int cnt = 0;
-
-  while (true)
-  {
-    cnt++;
-    int mid = (left+right)/2;
-    if(mid == x){
-      break;
-    }else if(mid > x){
-      right = mid - 1;
-    }else{
-      left = mid + 1;
+  int n; cin >> n;
+  string s; cin >> s;
+  int coffe = 0, cnt = 0;
+  for (char &c: s){
+    if(c == '1'){
+      coffe++;
     }
   }
 
-  cout << cnt << endl;
+  if(coffe>0){
+    cout << pow(2, coffe) << endl;
+  }else{
+    cout << 0 << endl;
+  }
 
   return 0;
 }
